@@ -1,21 +1,18 @@
+%define upstream_name    ANSIColor
+%define upstream_version 2.01
 
-%define realname   ANSIColor
-%define version    2.01
-%define release    %mkrel 1
+Name:       perl-%{upstream_name}
+Version:    %perl_convert_version %{upstream_version}
+Release:    %mkrel 1
 
-Name:       perl-%{realname}
-Version:    %{version}
-Release:    %{release}
-License:    GPL or Artistic
-Group:      Development/Perl
 Summary:    Color output using ANSI escape sequences
-Source:     http://www.cpan.org/modules/by-module/Term/%{realname}-%{version}.tar.gz
-Url:        http://search.cpan.org/dist/%{realname}
-BuildRoot:  %{_tmppath}/%{name}-%{version}-%{release}-buildroot
-BuildRequires: perl-devel
-
+License:    GPL+ or Artistic
+Group:      Development/Perl
+Url:        http://search.cpan.org/dist/%{upstream_name}
+Source0:    http://www.cpan.org/modules/by-module/Term/%{upstream_name}-%{upstream_version}.tar.gz
 
 BuildArch: noarch
+BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}
 
 %description
 This module has two interfaces, one through color() and colored() and the
@@ -33,7 +30,7 @@ uncolor() performs the opposite translation, turning escape sequences into
 a list of strings.
 
 %prep
-%setup -q -n %{realname}-%{version} 
+%setup -q -n %{upstream_name}-%{upstream_version}
 
 %build
 %{__perl} Makefile.PL INSTALLDIRS=vendor
@@ -54,5 +51,3 @@ rm -rf %buildroot
 %doc README ChangeLog README
 %{_mandir}/man3/*
 %perl_vendorlib/*
-
-
